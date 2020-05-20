@@ -29,7 +29,9 @@ const RecetasProvider = (props) => {
   }, [busqueda]);
 
   return (
-    <RecetasContext.Provider value={{ buscarRecetas, guardarConsultar }}>
+    <RecetasContext.Provider
+      value={{ recetas, buscarRecetas, guardarConsultar }}
+    >
       {props.children}
     </RecetasContext.Provider>
   );
