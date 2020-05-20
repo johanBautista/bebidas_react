@@ -1,17 +1,21 @@
 import React from 'react';
-import CategoriasProvider from './context/CategoriasContext';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
+
+import CategoriasProvider from './context/CategoriasContext';
+import RecetasProvider from './context/RecetasContext';
 
 function App() {
   return (
     <CategoriasProvider>
-      <Header titulo="Recetas de Cocktails" />
-      <div className="container mt-5">
-        <div className="row">
-          <Formulario />
+      <RecetasProvider>
+        <Header titulo="Recetas de Cocktails" />
+        <div className="container mt-5">
+          <div className="row">
+            <Formulario />
+          </div>
         </div>
-      </div>
+      </RecetasProvider>
     </CategoriasProvider>
   );
 }
