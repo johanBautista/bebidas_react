@@ -12,7 +12,7 @@ const Formulario = () => {
   // context par obtener categorias
   const { categorias } = useContext(CategoriasContext);
   // context obtener
-  const { buscarRecetas } = useContext(RecetasContext);
+  const { buscarRecetas, guardarConsultar } = useContext(RecetasContext);
 
   // obtener datos
   const obtenerDatosReceta = (e) => {
@@ -28,6 +28,7 @@ const Formulario = () => {
       onSubmit={(e) => {
         e.preventDefault();
         buscarRecetas(busqueda);
+        guardarConsultar(true);
       }}
     >
       <fieldset className="text-center">
