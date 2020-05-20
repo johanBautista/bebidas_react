@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { CategoriasContext } from '../context/CategoriasContext';
 import { RecetasContext } from '../context/RecetasContext';
+import Error from './Error';
 
 const Formulario = () => {
   //
@@ -13,6 +14,8 @@ const Formulario = () => {
   const { categorias } = useContext(CategoriasContext);
   // context obtener
   const { buscarRecetas, guardarConsultar } = useContext(RecetasContext);
+  // error
+  const [error, guardarError] = useState(false);
 
   // obtener datos
   const obtenerDatosReceta = (e) => {
@@ -22,15 +25,23 @@ const Formulario = () => {
     });
   };
 
+  //validacion del submit
+  const validarReceta = (e) => {
+    const { nombre, categoria } = busqueda;
+    e.preventDefault();
+    if (nombre.trim() === '' || categoria.trim() === '') {
+      guardarError(true);
+      return;
+    } else {
+      guardarError(false);
+      buscarRecetas(busqueda);
+      guardarConsultar(true);
+    }
+  };
+
   return (
-    <form
-      className="col-12"
-      onSubmit={(e) => {
-        e.preventDefault();
-        buscarRecetas(busqueda);
-        guardarConsultar(true);
-      }}
-    >
+    <form className="col-12" onSubmit={validarReceta}>
+      {error ? <Error mensaje="Todos los campos son Obligatorios" /> : null}
       <fieldset className="text-center">
         <legend>BUSCA CATEGORIA O INGREDIENTE</legend>
       </fieldset>
